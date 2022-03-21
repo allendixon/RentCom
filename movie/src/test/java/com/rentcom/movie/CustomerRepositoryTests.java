@@ -17,7 +17,7 @@ package com.rentcom.movie;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.apache.logging.log4j.*;
+//import org.apache.logging.log4j.*;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -43,7 +43,8 @@ public class CustomerRepositoryTests {
 	@BeforeEach
 	public void setUp() {
 
-		repository.deleteAll();
+		//repository.deleteAll();
+	
 
 		dave = repository.save(new Customer("Dave", "Matthews"));
 		oliver = repository.save(new Customer("Oliver August", "Matthews"));
@@ -55,7 +56,7 @@ public class CustomerRepositoryTests {
 
 		Customer dave = repository.save(new Customer("Dave", "Matthews"));
 		log.info("Hello There" + this.getClass().getSimpleName());
-
+ 
 		assertThat(dave.id).isNotNull();
 	
 	}

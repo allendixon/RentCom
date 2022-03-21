@@ -1,4 +1,4 @@
-package com.rentcom.movie;
+package com.rentcom.customer;
 
 public class CustomerNotFoundException extends RuntimeException{
 	/**

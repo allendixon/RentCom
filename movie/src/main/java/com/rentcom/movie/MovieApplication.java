@@ -5,15 +5,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.rentcom.movie.data.CustomerRepository;
-import com.rentcom.movie.data.Customer;
+import com.rentcom.movie.data.MovieRepository;
+import com.rentcom.movie.data.Movie;
 
 
 @SpringBootApplication
 public class MovieApplication implements CommandLineRunner {
 
 	@Autowired
-	private CustomerRepository repository;
+	private MovieRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieApplication.class, args);
@@ -23,15 +23,15 @@ public class MovieApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 
-		// fetch an individual customer
-		System.out.println("Customer found with findByFirstName('Alice'):");
+		// fetch an individual move
+		System.out.println("Movie found with findByTitle('Alice'):");
 		System.out.println("--------------------------------");
-		System.out.println(repository.findByFirstName("Alice"));
+		System.out.println(repository.findsByTitle("Test"));
 
-		System.out.println("Customers found with findByLastName('Smith'):");
+		System.out.println("Movies found with findAll('):");
 		System.out.println("--------------------------------");
-		for (Customer customer : repository.findByLastName("Smith")) {
-			System.out.println(customer);
+		for (Movie movie : repository.findAll()) {
+			System.out.println(movie);
 		}
 	}
 }

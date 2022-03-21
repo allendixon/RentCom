@@ -1,4 +1,4 @@
-package com.rentcom.movie.data;
+package com.rentcom.customer.data;
 
 import org.springframework.data.annotation.Id;
 import javax.persistence.Entity;

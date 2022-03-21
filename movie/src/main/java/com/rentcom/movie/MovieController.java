@@ -10,58 +10,58 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rentcom.movie.data.CustomerRepository;
-import com.rentcom.movie.data.Customer;
+import com.rentcom.movie.data.MovieRepository;
+import com.rentcom.movie.data.Movie;
 
 @RestController
 public class MovieController {
-	  private final CustomerRepository repository;
+	  private final MovieRepository repository;
 
-	  MovieController(CustomerRepository repository) {
+	  MovieController(MovieRepository repository) {
 	    this.repository = repository;
 	  }
 
 
 	  // Aggregate root
 	  // tag::get-aggregate-root[]
-	  @GetMapping("/customer")
-	  List<Customer> all() {
+	  @GetMapping("/movie")
+	  List<Movie> all() {
 	    return repository.findAll();
 	  }
 	  // end::get-aggregate-root[]
 
-	  @PostMapping("/customer")
-	  Customer newCustomer(@RequestBody Customer newCustomer) {
-	    return repository.save(newCustomer);
+	  @PostMapping("/movie")
+	  Movie newMovie(@RequestBody Movie newMovie) {
+	    return repository.save(newMovie);
 	  }
 
 	  // Single item
 	  
-	  @GetMapping("/customer/{id}")
-	  Customer one(@PathVariable String id) {
+	  @GetMapping("/movie/{id}")
+	  Movie one(@PathVariable String id) {
 	    
 	    return repository.findById(id)
-	      .orElseThrow(() -> new CustomerNotFoundException(id));
+	      .orElseThrow(() -> new MovieNotFoundException(id));
 	  }
 
-	  @PutMapping("/customer/{id}")
-	  Customer replaceCustomer(@RequestBody Customer newCustomer, @PathVariable String id) {
+	  @PutMapping("/movie/{id}")
+	  Movie replaceMovie(@RequestBody Movie newMovie, @PathVariable String id) {
 	    
 	    return repository.findById(id)
-	      .map(customer -> {
-	    	  customer.setFirstName(newCustomer.getFirstName());
+	      .map(movie -> {
+	    	  movie.setTitle(newMovie.getTitle());
 	    	  
-	    	  customer.setLastName(newCustomer.getLastName());
-	        return repository.save(customer);
+	    	  movie.setRated(newMovie.getRated());
+	        return repository.save(movie);
 	      })
 	      .orElseGet(() -> {
-	    	  newCustomer.id = id;
-	        return repository.save(newCustomer);
+	    	  newMovie.id = id;
+	        return repository.save(newMovie);
 	      });
 	  }
 
-	  @DeleteMapping("/customer/{id}")
-	  void deleteCustomer(@PathVariable String id) {
+	  @DeleteMapping("/movie/{id}")
+	  void deleteMovie(@PathVariable String id) {
 	    repository.deleteById(id);
 	  }
 }
